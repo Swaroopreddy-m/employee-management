@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "user_master")
 public class UserMaster {
 
+<<<<<<< HEAD
     @Id
     @Column(name = "CUSTOMER_ID", nullable = false, length = 255)
     private String customerId;
@@ -104,3 +105,12 @@ public class UserMaster {
     public String getOthers() { return others; }
     public void setOthers(String others) { this.others = others; }
 }
+=======
+	@Id
+    @Column(name = "customer_id")
+    private String userId;
+
+
+}
+
+>>>>>>> 862f1b99b1ef1ced8e7ab519332f328e0bcad9f1
