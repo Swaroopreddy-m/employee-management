@@ -7,4 +7,9 @@ import com.third.springboot.employee.entity.UserMaster;
 @Repository
 public interface UserMasterRepository extends JpaRepository<UserMaster, String> {
 
+    // Optional: find by systemUserId
+    UserMaster findBySystemUserId(String systemUserId);
+
+    // Optional: find by userName
+    UserMaster findByUserName(String userName);
 }
