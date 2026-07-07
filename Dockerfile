@@ -15,10 +15,10 @@ FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Copy the built WAR from build stage
-COPY --from=build /app/target/*.war app.war
+# Copy the built JAR from build stage
+COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-# Run the WAR using Spring Boot loader
-CMD ["java", "-jar", "app.war"]
+# Run the JAR using Spring Boot loader
+CMD ["java", "-jar", "app.jar"]

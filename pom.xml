@@ -11,7 +11,7 @@
 	<groupId>com.third.springboot</groupId>
 	<artifactId>employee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>employee-management</name>
 	<description>Employee Management System is a full-stack web application designed to manage employee records efficiently. The system supports CRUD operations, role-based access control, and secure authentication.</description>
 	<url/>
@@ -55,11 +55,7 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
