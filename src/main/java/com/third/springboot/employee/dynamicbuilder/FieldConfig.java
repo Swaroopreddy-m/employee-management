@@ -3,9 +3,9 @@ package com.third.springboot.employee.dynamicbuilder;
 public class FieldConfig {
 
     private String name;
-    private char type;        // I (Input), L (Label), etc.
-    private char visibility;  // D (Display) / H (Hidden)
-    private char color;       // B (Black) / W (White) / R (Red)
+    private String type;        // I (Input), L (Label), etc.
+    private String visibility;  // D (Display) / H (Hidden)
+    private String color;       // B (Black) / W (White) / R (Red)
     private String width;     // 10%, 100px, auto
 
     // 🔹 Getters
@@ -14,15 +14,15 @@ public class FieldConfig {
         return name;
     }
 
-    public char getType() {
+    public String getType() {
         return type;
     }
 
-    public char getVisibility() {
+    public String getVisibility() {
         return visibility;
     }
 
-    public char getColor() {
+    public String getColor() {
         return color;
     }
 
@@ -36,15 +36,15 @@ public class FieldConfig {
         this.name = name;
     }
 
-    public void setType(char type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public void setVisibility(char visibility) {
+    public void setVisibility(String visibility) {
         this.visibility = visibility;
     }
 
-    public void setColor(char color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -57,9 +57,9 @@ public class FieldConfig {
     public String toString() {
         return "FieldConfig{" +
                 "name='" + name + '\'' +
-                ", type=" + type +
-                ", visibility=" + visibility +
-                ", color=" + color +
+                ", type='" + type + '\'' +
+                ", visibility='" + visibility + '\'' +
+                ", color='" + color + '\'' +
                 ", width='" + width + '\'' +
                 '}';
     }

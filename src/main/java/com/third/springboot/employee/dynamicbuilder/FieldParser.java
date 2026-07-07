@@ -40,12 +40,11 @@ public class FieldParser {
                 continue;
             }
 
-            // 5️⃣ Build FieldConfig
             FieldConfig config = new FieldConfig();
             config.setName(parts[0].trim());
-            config.setType(parts[1].trim().charAt(0));
-            config.setVisibility(parts[2].trim().charAt(0));
-            config.setColor(parts[3].trim().charAt(0));
+            config.setType(parts[1].trim());
+            config.setVisibility(parts[2].trim());
+            config.setColor(parts[3].trim());
             config.setWidth(parts[4].trim());
 
             fieldsList.add(config);
