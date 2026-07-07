@@ -1,0 +1,81 @@
+-- Drop tables if they exist to start fresh
+DROP TABLE IF EXISTS user_id_mapping CASCADE;
+DROP TABLE IF EXISTS pin_master CASCADE;
+DROP TABLE IF EXISTS user_master CASCADE;
+DROP TABLE IF EXISTS EMPLOYEE CASCADE;
+
+-- 1. Create EMPLOYEE Table
+CREATE TABLE EMPLOYEE (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    department VARCHAR(255),
+    salary DOUBLE PRECISION
+);
+
+-- 2. Create user_master Table
+CREATE TABLE user_master (
+    CUSTOMER_ID VARCHAR(255) PRIMARY KEY,
+    NAME VARCHAR(255),
+    EMAIL VARCHAR(200),
+    MOBILE VARCHAR(200),
+    SYSTEM_USER_ID VARCHAR(100) UNIQUE,
+    USER_NAME VARCHAR(200),
+    USER_GROUPS VARCHAR(100),
+    USER_ENTITY VARCHAR(100),
+    USER_STATUS VARCHAR(100),
+    USER_LAST_LOGIN_TIME VARCHAR(100),
+    CREATED_BY VARCHAR(100),
+    CREATED_TIME VARCHAR(100),
+    APPROVED_BY VARCHAR(100),
+    APPROVED_TIME VARCHAR(100),
+    IP VARCHAR(100),
+    OTHERS VARCHAR(100)
+);
+
+-- 3. Create pin_master Table
+CREATE TABLE pin_master (
+    CUSTOMER_ID VARCHAR(255) PRIMARY KEY,
+    CUSTOMER_PASSWORD VARCHAR(255),
+    SYSTEM_USER_ID VARCHAR(100)
+);
+
+-- 4. Create user_id_mapping Table
+CREATE TABLE user_id_mapping (
+    id BIGSERIAL PRIMARY KEY,
+    SYSTEM_USER_ID VARCHAR(100),
+    LOGIN_USER_ID VARCHAR(100),
+    CREATED_BY VARCHAR(100),
+    CREATED_TIME VARCHAR(100),
+    APPROVED_BY VARCHAR(100),
+    APPROVED_TIME VARCHAR(100),
+    IP VARCHAR(100),
+    OTHERS VARCHAR(100),
+    CONSTRAINT fk_user_master_system FOREIGN KEY (SYSTEM_USER_ID) REFERENCES user_master(SYSTEM_USER_ID)
+);
+
+-- 5. Seed Data
+-- Seed Employees
+INSERT INTO EMPLOYEE (name, email, department, salary) VALUES
+('Alice Johnson', 'alice@example.com', 'Engineering', 75000.00),
+('Bob Smith', 'bob@example.com', 'Product', 82000.00),
+('Carol White', 'carol@example.com', 'HR', 60000.00);
+
+-- Seed User Master
+INSERT INTO user_master (
+    CUSTOMER_ID, NAME, EMAIL, MOBILE, SYSTEM_USER_ID, USER_NAME, USER_GROUPS, 
+    USER_ENTITY, USER_STATUS, USER_LAST_LOGIN_TIME, CREATED_BY, CREATED_TIME, 
+    APPROVED_BY, APPROVED_TIME, IP, OTHERS
+) VALUES (
+    'US001', 'John Doe', 'john.doe@example.com', '9876543210', 'SYS001', 'john_doe', 'ADMIN',
+    'ENT01', 'ACTIVE', '2026-07-07 10:00:00', 'system', '2026-07-07 09:00:00',
+    'supervisor', '2026-07-07 09:30:00', '127.0.0.1', 'none'
+);
+
+-- Seed Pin Master (using matching CUSTOMER_ID)
+INSERT INTO pin_master (CUSTOMER_ID, CUSTOMER_PASSWORD, SYSTEM_USER_ID) VALUES
+('US001', 'password123', 'SYS001');
+
+-- Seed User ID Mapping
+INSERT INTO user_id_mapping (SYSTEM_USER_ID, LOGIN_USER_ID, CREATED_BY, CREATED_TIME, APPROVED_BY, APPROVED_TIME, IP, OTHERS) VALUES
+('SYS001', 'john_doe', 'system', '2026-07-07 09:00:00', 'supervisor', '2026-07-07 09:30:00', '127.0.0.1', 'none');

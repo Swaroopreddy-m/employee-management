@@ -48,9 +48,9 @@ public class PageService {
 
             FieldConfig field = new FieldConfig();
             field.setName(parts[0]);
-            field.setType(parts[1].charAt(0));
-            field.setVisibility(parts[2].charAt(0));
-            field.setColor(parts[3].charAt(0));
+            field.setType(parts[1]);
+            field.setVisibility(parts[2]);
+            field.setColor(parts[3]);
             field.setWidth(parts[4]);
             fieldConfigs.add(field);
         }

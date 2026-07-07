@@ -23,7 +23,7 @@ public class PageController {
         String pageKey = resolvePageKey(type);
 
         model.addAttribute("pageType", type.toUpperCase());
-        model.addAttribute("fields", pageService.getPageFields(pageKey));
+        model.addAttribute("fields", pageService.getPageFields(pageKey).getFields());
 
         return "dynamic-page"; // Thymeleaf / JSP page
     }
@@ -34,16 +34,16 @@ public class PageController {
     private String resolvePageKey(String type) {
 
         if (type == null) {
-            return "CAPTURE-FIRSTP";
+            return "FIRSTP";
         }
 
         switch (type.toLowerCase()) {
             case "capture":
-                return "CAPTURE-FIRSTP";
+                return "FIRSTP";
             case "confirm":
-                return "CONFIRM-FIRST1";
+                return "FIRST1";
             case "acknowledge":
-                return "ACKNOWLEDGE-FIRST2";
+                return "FIRST2";
             default:
                 throw new IllegalArgumentException("Invalid page type: " + type);
         }

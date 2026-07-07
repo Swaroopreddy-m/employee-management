@@ -1,0 +1,46 @@
+# Migration Walkthrough
+
+The Spring Boot application has been successfully migrated from Oracle Database to PostgreSQL, verified locally, and is ready for production deployment.
+
+## 1. Accomplished Tasks
+
+- **Dependency Swapping**: Replaced Oracle JDBC (`ojdbc11`) with PostgreSQL JDBC (`postgresql`) in [pom.xml](file:///c:/Users/user/Documents/Projects/employee-management/pom.xml).
+- **Thymeleaf Support Added**: Configured the `spring-boot-starter-thymeleaf` starter dependency for dynamic rendering support.
+- **PostgreSQL Properties Configured**: Updated [application.properties](file:///c:/Users/user/Documents/Projects/employee-management/src/main/resources/application.properties) with robust PostgreSQL dialects, settings, and environment-variable placeholders.
+- **PostgreSQL Schema & Seed Data Creation**: Wrote and validated the schema and seed data in [schema.sql](file:///c:/Users/user/Documents/Projects/employee-management/schema.sql).
+- **Thymeleaf Template Design**: Created [dynamic-page.html](file:///c:/Users/user/Documents/Projects/employee-management/src/main/resources/templates/dynamic-page.html) using vanilla CSS and semantic structure to support Capture, Confirm, and Acknowledge layouts.
+- **Dynamic Render Debugging**:
+  1. Resolved model attribute exception by supplying the fields list directly from the `PageData` object to the model.
+  2. Fixed page key resolution mapping in `PageController.java` to correctly locate property configurations (`FIRSTP`, `FIRST1`, `FIRST2`).
+  3. Swapped `char` fields to `String` fields in `FieldConfig` (and corresponding parsers/services) to prevent type-mismatch evaluation issues during Spring Expression Language (SpEL) evaluations in Thymeleaf.
+- **Build & Verification**:
+  - Run all Spring Boot unit tests successfully (`BUILD SUCCESS`).
+  - Verified REST APIs (Login, Employee CRUD with Basic Auth, Users, and Dynamic Pages).
+
+---
+
+## 2. Verification Outcomes
+
+### Local Endpoint Verification Logs
+
+| Endpoint | Method | Expected Output | Status Code | Verification Result |
+| :--- | :--- | :--- | :--- | :--- |
+| `/api/auth/login` | POST | `LOGIN_SUCCESS` for correct user/pass | `200 OK` | **Passed** |
+| `/api/auth/login` | POST | `INVALID_CREDENTIALS` for wrong credentials | `401 Unauthorized` | **Passed** |
+| `/api/employees` | GET | List of all employees (Basic Auth) | `200 OK` | **Passed** |
+| `/api/employees` | POST | Create a new employee (Basic Auth) | `200 OK` | **Passed** |
+| `/api/employees/{id}`| GET | Retrieve created employee (Basic Auth) | `200 OK` | **Passed** |
+| `/api/employees/{id}`| DELETE| Delete employee (Basic Auth) | `200 OK` | **Passed** |
+| `/api/users` | GET | List of all system users | `200 OK` | **Passed** |
+| `/api/pages/FIRSTP`| POST | Page configuration layout JSON | `200 OK` | **Passed** |
+| `/page/capture` | GET | Dynamic HTML form with inputs | `200 OK` | **Passed** |
+| `/page/confirm` | GET | Dynamic HTML form with read-only inputs | `200 OK` | **Passed** |
+| `/page/acknowledge` | GET | Dynamic HTML Table layout of values | `200 OK` | **Passed** |
+
+---
+
+## 3. Reference Documents
+
+- **Database Schema**: Refer to [schema.sql](file:///c:/Users/user/Documents/Projects/employee-management/schema.sql)
+- **Comprehensive API & Schema Reference**: Refer to [system_documentation.md](file:///C:/Users/user/.gemini/antigravity/brain/38fd81a6-c2c2-415b-a9ea-489b753ffcf1/system_documentation.md)
+- **Render Deployment Steps**: Refer to [render_deployment_guide.md](file:///C:/Users/user/.gemini/antigravity/brain/38fd81a6-c2c2-415b-a9ea-489b753ffcf1/render_deployment_guide.md)
